@@ -10,27 +10,36 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import pageObjects.Base_PO;
 
 import static driver.DriverFactory.getDriver;
 
 
-public class Contact_Us_Steps {
+public class Contact_Us_Steps extends Base_PO {
     private WebDriver driver =getDriver();
 
-    public String genratRundomeNumber (int length){
-        return RandomStringUtils.randomNumeric(length);
-    }
 
     //implement the Scenario of test cases
     @Given("I access the webdriver university contact us page")
     public void i_access_the_webdriver_university_contact_us_page() {
         // Write code here that turns the phrase above into concrete actions
-        driver.get("https://www.webdriveruniversity.com/Contact-Us/contactus.html");
+       navigateTo_URL("https://www.webdriveruniversity.com/Contact-Us/contactus.html");
     }
+
+    /**
+     * Step definition for entering a unique first name in a form field.
+     *
+     * This method simulates the action of a user entering a unique first name into a text input field identified by
+     * its 'name' attribute. The first name is generated dynamically by appending a random 5-digit number to the prefix "AutoFN".
+     * The generated name is then entered into the input field using the `sendKey` method, ensuring that the field is
+     * ready to accept input before typing the text.
+     */
+
     @When("I enter a unique first name")
     public void i_enter_a_unique_first_name() {
         // Write code here that turns the phrase above into concrete actions
-        driver.findElement(By.xpath("//input[@name='first_name']")).sendKeys("AutoFN"+genratRundomeNumber(5));
+        //driver.findElement(By.xpath("//input[@name='first_name']")).sendKeys("AutoFN"+genratRundomeNumber(5));
+        sendKey(By.xpath("//input[@name='first_name']"),"AutoFN"+genratRundomeNumber(5));
     }
     @And("I enter a unique last name")
     public void i_enter_a_unique_last_name() {
@@ -73,7 +82,8 @@ public class Contact_Us_Steps {
     @And("I click on the submit button")
     public void i_click_on_the_submit_button() {
         // Write code here that turns the phrase above into concrete actions
-        driver.findElement(By.xpath("//input[@value=\"SUBMIT\"]")).click();
+        //driver.findElement(By.xpath("//input[@value=\"SUBMIT\"]")).click();
+        waitForWebElementAndClick(By.xpath("//input[@value=\"SUBMIT\"]"));
 
     }
     @Then("I should be presented with a successful contact us submission message")

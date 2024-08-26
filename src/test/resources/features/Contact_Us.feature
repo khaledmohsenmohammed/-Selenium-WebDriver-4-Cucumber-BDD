@@ -17,4 +17,5 @@ Feature: WebDriver University - Contact Us Page
     And I enter specific last name mohsen
     And I enter specific email address "khaledtesr@gmail.com"
     And I enter specific comment "How are you ?"
+    And I click on the submit button
     Then I should be presented with a successful contact us submission message

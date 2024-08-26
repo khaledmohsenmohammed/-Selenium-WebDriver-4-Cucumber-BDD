@@ -7,24 +7,27 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import pageObjects.Base_PO;
 
 import static driver.DriverFactory.getDriver;
 
 
-public class Login_Steps  {
+public class Login_Steps extends Base_PO {
     private WebDriver driver =getDriver();
 
     @Given("I acsess the WebDriver University Login page")
     public void i_acsess_the_web_driver_university_login_page() {
-    driver.get("https://www.webdriveruniversity.com/Login-Portal/index.html");
+    navigateTo_URL("https://www.webdriveruniversity.com/Login-Portal/index.html");
     }
     @When("I enter a username {string}")
     public void i_enter_a_username(String username) {
-        driver.findElement(By.id("text")).sendKeys(username);
+        sendKey(By.id("text") ,username );
+        //driver.findElement(By.id("text")).sendKeys(username);
     }
     @And("I enter pass {string}")
     public void i_enter_pass(String password) {
-        driver.findElement(By.id("password")).sendKeys(password);
+        sendKey(By.id("password") ,password );
+        //river.findElement(By.id("password")).sendKeys(password);
     }
     @And("I click on the login button")
     public void i_click_on_the_login_button() {
