@@ -4,59 +4,53 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pageObjects.Base_PO;
+import pageObjects.Login_PO;
 
-import static driver.DriverFactory.getDriver;
+
 
 
 public class Login_Steps extends Base_PO {
-    private WebDriver driver =getDriver();
+
+    //to inject the loginSteps
+    private Login_PO loginPo ;
+    public Login_Steps (Login_PO login_Po){
+        this.loginPo = login_Po ;
+    }
 
     @Given("I acsess the WebDriver University Login page")
     public void i_acsess_the_web_driver_university_login_page() {
-    navigateTo_URL("https://www.webdriveruniversity.com/Login-Portal/index.html");
-    }
-    @When("I enter a username {string}")
-    public void i_enter_a_username(String username) {
-        sendKey(By.id("text") ,username );
-        //driver.findElement(By.id("text")).sendKeys(username);
-    }
-    @And("I enter pass {string}")
-    public void i_enter_pass(String password) {
-        sendKey(By.id("password") ,password );
-        //river.findElement(By.id("password")).sendKeys(password);
-    }
-    @And("I click on the login button")
-    public void i_click_on_the_login_button() {
-        driver.findElement(By.id("login-button")).click();
-    }
-    @Then("Verifaying the login successful")
-    public void verifaying_the_login_successful() {
-        String login_Message = driver.switchTo().alert().getText();
-        Assert.assertEquals(login_Message, "validation succeeded");
-    }
-    @Then("Verifying the login unsuccessful")
-    public void verifaying_the_login_unsuccessful() {
-        String login_Message = driver.switchTo().alert().getText();
-        Assert.assertEquals(login_Message, "validation failed");
+        loginPo.navigateTo_WebdeiverUniv_Login_Page();
     }
 
     @When("I enter a username {word}")
     public void i_enter_a_outline_username(String username) {
-        driver.findElement(By.id("text")).sendKeys(username);
+        loginPo.setUsername_textField(username);
 
     }
     @And("I enter pass {word}")
-    public void i_enter_outline_pass(String pass) {
-        driver.findElement(By.id("password")).sendKeys(pass);
+    public void i_enter_outline_pass(String password) {
+        loginPo.setPass_textField(password);
+    }
+    @And("I click on the login button")
+    public void i_click_on_the_login_button() {
+        loginPo.clickOnLogin_Button();
+    }
+
+    @Then("Verifaying the login successful")
+    public void verifaying_the_login_successful() {
+        loginPo.validateSuccesfulLoginMessage();
+    }
+    @Then("Verifying the login unsuccessful")
+    public void verifaying_the_login_unsuccessful() {
+        loginPo.validateUnSuccesfulLoginMessage();
     }
     @Then("I should be presented withe the following validation {}")
     public void i_should_be_presented_withe_the_following(String message) {
-        String login_Message = driver.switchTo().alert().getText();
-        Assert.assertEquals(login_Message, message);
+    loginPo.waitForAlert_And_validateText(message);
     }
 
 }

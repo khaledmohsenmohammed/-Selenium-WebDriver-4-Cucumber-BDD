@@ -3,7 +3,7 @@ Feature: WebDriver University - Contact Us Page
 
   Background:
     Given I access the webdriver university contact us page
-
+@ContactUsOneUnique_Data
   Scenario: Validate Successful submission - Unique Data
     When I enter a unique first name
     And I enter a unique last name
