@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.testng.Assert;
+import utils.Global_Vars;
 
 public class ContactUs_PO extends Base_PO {
     //input[@name='first_name']
@@ -31,7 +32,7 @@ public class ContactUs_PO extends Base_PO {
         super();
     }
     public void navigateTo_WebdeiverUniv_ContactUs() {
-        navigateTo_URL("https://www.webdriveruniversity.com/Contact-Us/contactus.html");
+        navigateTo_URL(Global_Vars.URL + "Contact-Us/contactus.html");
     }
 
     public void setFirstName_textField (String first_name) {

@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import utils.Global_Vars;
 
 import java.time.Duration;
 
@@ -39,11 +40,11 @@ public class Base_PO {
      * @param textToType The text string to be sent to the web element.
      */
     public void sendKey (By by ,  String textToType) {
-        WebDriverWait wait= new WebDriverWait(getDriver() , Duration.ofSeconds(10));
+        WebDriverWait wait= new WebDriverWait(getDriver() , Duration.ofSeconds(Global_Vars.DEFAULT_EXPLICIT_TIMEOUT));
         wait.until(ExpectedConditions.elementToBeClickable(by)).sendKeys(textToType);
     }
     public void sendKey (WebElement element , String textToType) {
-        WebDriverWait wait= new WebDriverWait(getDriver() , Duration.ofSeconds(10));
+        WebDriverWait wait= new WebDriverWait(getDriver() , Duration.ofSeconds(Global_Vars.DEFAULT_EXPLICIT_TIMEOUT));
         wait.until(ExpectedConditions.elementToBeClickable(element)).sendKeys(textToType);
     }
     /**
@@ -57,16 +58,16 @@ public class Base_PO {
      * @param by The locator used to find the web element (e.g., By.Id, By.xpath, etc.).
      */
     public void waitForWebElementAndClick (By by ) {
-        WebDriverWait wait= new WebDriverWait(getDriver() , Duration.ofSeconds(10));
+        WebDriverWait wait= new WebDriverWait(getDriver() , Duration.ofSeconds(Global_Vars.DEFAULT_EXPLICIT_TIMEOUT));
         wait.until(ExpectedConditions.elementToBeClickable(by)).click();
     }
     public void waitForWebElementAndClick (WebElement element ) {
-        WebDriverWait wait= new WebDriverWait(getDriver() , Duration.ofSeconds(10));
+        WebDriverWait wait= new WebDriverWait(getDriver() , Duration.ofSeconds(Global_Vars.DEFAULT_EXPLICIT_TIMEOUT));
         wait.until(ExpectedConditions.elementToBeClickable(element)).click();
     }
     //get the alert
     public void waitForAlert_And_validateText (String text){
-        WebDriverWait wait= new WebDriverWait(getDriver() , Duration.ofSeconds(10));
+        WebDriverWait wait= new WebDriverWait(getDriver() , Duration.ofSeconds(Global_Vars.DEFAULT_EXPLICIT_TIMEOUT));
         wait.until(ExpectedConditions.alertIsPresent());
         //to extract the message from alert
         String alertMessageText = getDriver().switchTo().alert().getText() ;
