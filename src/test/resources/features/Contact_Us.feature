@@ -11,7 +11,7 @@ Feature: WebDriver University - Contact Us Page
     And I enter a unique comment
     And I click on the submit button
     Then I should be presented with a successful contact us submission message
-
+  @ContactUsOneSpecific_Data
   Scenario:Validate Successful submission - Specific Data
     When I enter specific first name khaled
     And I enter specific last name mohsen

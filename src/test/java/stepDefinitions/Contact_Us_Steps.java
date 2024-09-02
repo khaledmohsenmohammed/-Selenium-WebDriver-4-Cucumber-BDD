@@ -41,65 +41,48 @@ public class Contact_Us_Steps extends Base_PO {
 
     @When("I enter a unique first name")
     public void i_enter_a_unique_first_name() {
-        // Write code here that turns the phrase above into concrete actions
-        //driver.findElement(By.xpath("//input[@name='first_name']")).sendKeys("AutoFN"+genratRundomeNumber(5));
-        //sendKey(By.xpath("//input[@name='first_name']"),"AutoFN"+genratRundomeNumber(5));
         contactUsPo.setFirstName_textField("AutoFN"+genratRundomeNumber(5));
     }
     @And("I enter a unique last name")
     public void i_enter_a_unique_last_name() {
-        // Write code here that turns the phrase above into concrete actions
-        //driver.findElement(By.xpath("//input[@name='last_name']")).sendKeys("AutoFN"+genratRundomeNumber(4));
         contactUsPo.setLasttName_textField("AutoFN"+genratRundomeNumber(4));
     }
     @And("I enter a unique email address")
     public void i_enter_a_unique_email_address() {
-        // Write code here that turns the phrase above into concrete actions
-        //driver.findElement(By.xpath("//input[@name='email']")).sendKeys("AutoFN"+genratRundomeNumber(5)+"@autofn.com");
         contactUsPo.setEmailAddress_textField("AutoFN"+genratRundomeNumber(5)+"@autofn.com");
     }
     @And("I enter a unique comment")
     public void i_enter_a_unique_comment() {
-        // Write code here that turns the phrase above into concrete actions
-        // driver.findElement(By.xpath("//textarea[@name='message']")).sendKeys("Mohsen");
       contactUsPo.setUniqueComment_textField("Mohsen");
     }
     @When("I enter specific first name {word}")
     public void i_enter_specific_first_name_khaled(String firstName) {
         System.out.println("=======> : " + firstName);
-        driver.findElement(By.xpath("//input[@name='first_name']")).sendKeys(firstName);
+        contactUsPo.setFirstName_textField(firstName);
     }
 
     @When("I enter specific last name {word}")
     public void i_enter_specific_last_name_mohsen(String LastName) {
         System.out.println("=======> : " + LastName);
-        driver.findElement(By.xpath("//input[@name='last_name']")).sendKeys(LastName);
+        contactUsPo.setLasttName_textField(LastName);
     }
     @When("I enter specific email address {string}")
     public void i_enter_specific_email_address(String string) {
         System.out.println("=======> : " + string);
-        driver.findElement(By.xpath("//input[@name='email']")).sendKeys(string);
-
+        contactUsPo.setEmailAddress_textField(string);
     }
     @When("I enter specific comment {string}")
     public void i_enter_specific_comment(String string) {
-        driver.findElement(By.xpath("//textarea[@name='message']")).sendKeys(string);
-
+    contactUsPo.setUniqueComment_textField(string);
     }
 
     @And("I click on the submit button")
     public void i_click_on_the_submit_button() {
-        // Write code here that turns the phrase above into concrete actions
-        //driver.findElement(By.xpath("//input[@value=\"SUBMIT\"]")).click();
-        waitForWebElementAndClick(By.xpath("//input[@value=\"SUBMIT\"]"));
-
+       contactUsPo.clickSubmitButton();
     }
     @Then("I should be presented with a successful contact us submission message")
     public void i_should_be_presented_with_a_successful_contact_us_submission_message() {
-        // Write code here that turns the phrase above into concrete actions
-        //driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        WebElement contactUs_Submission_Message = driver.findElement(By.xpath("//div[@id='contact_reply']/h1"));
-        Assert.assertEquals(contactUs_Submission_Message.getText(), "Thank You for your Message!");
+        contactUsPo.validateCommentSubmit();
     }
 
 }

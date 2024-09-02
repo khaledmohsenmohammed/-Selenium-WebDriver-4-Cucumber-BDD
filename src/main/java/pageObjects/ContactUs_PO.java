@@ -1,11 +1,13 @@
 package pageObjects;
 
+import org.openqa.selenium.PrintsPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.testng.Assert;
 
 public class ContactUs_PO extends Base_PO {
-
+    //input[@name='first_name']
     private @FindBy (xpath = "//input[@name='first_name']")
     WebElement firstName_textField  ;
   // another way for xpath
@@ -17,6 +19,12 @@ public class ContactUs_PO extends Base_PO {
 
     private @FindBy (xpath = "//textarea[@name='message']")
     WebElement uniqueComment_textField  ;
+
+    private @FindBy (xpath = "//input[@value=\"SUBMIT\"]")
+    WebElement clickSubmitButton ;
+
+    private @FindBy (xpath = "//div[@id='contact_reply']/h1")
+    WebElement contactUs_Submission_Message ;
 
     //constructor
     public ContactUs_PO (){
@@ -40,5 +48,12 @@ public class ContactUs_PO extends Base_PO {
 
     public void setUniqueComment_textField (String comment) {
         sendKey(uniqueComment_textField , comment);
+    }
+    public void clickSubmitButton () {
+        waitForWebElementAndClick(clickSubmitButton);
+    }
+
+    public void  validateCommentSubmit (){
+        Assert.assertEquals(contactUs_Submission_Message.getText(), "Thank You for your Message!");
     }
 }
